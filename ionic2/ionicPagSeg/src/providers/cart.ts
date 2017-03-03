@@ -10,9 +10,22 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Cart {
+	items: Array<any>;
+	total = 0;
 
-  constructor(public http: Http) {
+	addItem(item) {
+		this.items.push(item);
+		this.calculateTotal();
+	}
+
+	calculateTotal() {
+		let total = 0;
+		this.items.forEach(item => total += item.price);
+	}
+
+
+/*  constructor(public http: Http) {
     console.log('Hello Cart Provider');
-  }
+  }*/
 
 }

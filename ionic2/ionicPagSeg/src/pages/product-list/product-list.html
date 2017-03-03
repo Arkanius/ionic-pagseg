@@ -14,11 +14,8 @@
 
 
 <ion-content padding>
-	<!--
-	<ion-list *ngFor="let product of products">
-		<ion-item href="#">Nome: {{product.name}}</ion-item>
-		<ion-item href="#">Test2</ion-item>
+	
+	<ion-list *ngFor="let product of products" (click)="addItem(product)">
+		{{product.name}}
 	</ion-list>
-	-->
-	{{products}}
 </ion-content>

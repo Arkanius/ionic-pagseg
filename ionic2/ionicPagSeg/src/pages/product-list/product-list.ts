@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import  { Cart } from '../../providers/cart';
+import { MyCartPage } from '../my-cart/my-cart';
+
 
 /*
   Generated class for the ProductList page.
@@ -16,17 +19,24 @@ import 'rxjs/add/operator/toPromise';
 })
 export class ProductListPage implements OnInit {
 
-  products = Array;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) {}
+  	products = Array;
+	constructor(public navCtrl: NavController, 
+			public navParams: NavParams, 
+			private http: Http, 
+			private cart: Cart) {}
 
-  ngOnInit():any {
-  	this.http.get('https://jsonplaceholder.typicode.com/users')
-  		.toPromise().then(response => this.products = response.json())
-  }
+	ngOnInit():any {
+		this.http.get('http://127.0.0.1:8000/api/products')
+			.toPromise().then(response => this.products = response.json())
+	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductListPage');
-  }
+	addItem(item) {
+		this.cart.addItem(item);
+		this.navCtrl.push(MyCartPage)
+	}
+
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad ProductListPage');
+	}
 
 }

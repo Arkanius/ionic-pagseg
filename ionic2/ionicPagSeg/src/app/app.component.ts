@@ -8,10 +8,12 @@ import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 import { ProductListPage } from '../pages/product-list/product-list';
 import { MyCartPage } from '../pages/my-cart/my-cart';
+import { Cart } from '../providers/cart';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [Cart]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

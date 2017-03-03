@@ -14,5 +14,9 @@
 
 
 <ion-content padding>
-
+	<ion-list>			
+		<ion-list *ngFor="let product of products">
+			{{product.name}}
+		</ion-list>
+	</ion-list>
 </ion-content>
