@@ -21,6 +21,7 @@ export class CheckoutPage implements OnInit {
   	monthExp: '',
   	yearExp: '',
   	brand: '',
+  	token: '',
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
@@ -56,10 +57,27 @@ export class CheckoutPage implements OnInit {
   		cardBin: this.creditCard.num.substring(0, 6),
 
   		success: response => {
-  			this.creditCard.brand = response.brand.name
+  			this.creditCard.brand = response.brand.name;
+  			this.ref.detectChanges();
+  			this.getCreditCardToken();
+  		}
+  	});
+  }
+
+  getCreditCardToken() {
+  	PagSeguroDirectPayment.createCardToken({
+  		cardNumber: this.creditCard.num,
+  		brand: this.creditCard.brand,
+  		cvv: this.creditCard.cvv,
+  		expirationMonth: this.creditCard.monthExp,
+  		expirationYear: this.creditCard.yearExp,
+
+  		success: response => {
+  			this.creditCard.token = response.card.token
   			this.ref.detectChanges();
   		}
   	});
   }
+
 
 }

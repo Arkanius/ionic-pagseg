@@ -9,3 +9,6 @@ PagSeguroDirectPayment.getPaymentMethods: PAGSEGURO JS
 PagSeguroDirectPayment.getBrand:  PAGSEGURO JS
 	Detecta qual a bandeira de cartão do usuário, passar o "cardBin";
 
+
+PagSeguroDirectPayment.createCardToken:  PAGSEGURO JS
+	Cria o token de pagamento passando as informações do cartão (numero, cvv, mes, ano, bandeira);
