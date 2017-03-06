@@ -7,15 +7,20 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Listagem Teste</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-	
-	<ion-list *ngFor="let product of products" (click)="addItem(product)">
-		{{product.name}}
+<ion-content padding>	
+	<ion-list>
+    
+<!--                     <ion-item *ngFor="let o of products" (click)="additem(o)">
+                            {{o.name}}
+                    </ion-item>	   --> 	
 	</ion-list>
 </ion-content>

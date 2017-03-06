@@ -1,11 +1,7 @@
 <?php
 
-header('Access-Control-Allow-Origin:  *');
-header("Access-Control-Allow-Credentials", "true");
-header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
-header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-
 use App\Product;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +13,14 @@ use App\Product;
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::get('/products', function () {
-    return response()->json(Product::all());
+
+Route::group(['prefix' => 'api', 'middleware' => 'cors'], function() {
+	Route::get('/products', function () {
+	    return response()->json(Product::all()->toArray());
+	});
+
+	Route::get('session', 'PagSeguroController@getSessionId');	
 });
+
+
+

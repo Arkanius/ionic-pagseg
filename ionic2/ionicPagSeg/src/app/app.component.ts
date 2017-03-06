@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-
 import { Platform, MenuController, Nav } from 'ionic-angular';
-
 import { StatusBar, Splashscreen } from 'ionic-native';
-
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 import { ProductListPage } from '../pages/product-list/product-list';
 import { MyCartPage } from '../pages/my-cart/my-cart';
+import { CheckoutPage } from '../pages/checkout/checkout';
 import { Cart } from '../providers/cart';
+import { Http } from '@angular/http';
+
+declare var PagSeguroDirectPayment;
 
 
 @Component({
@@ -24,9 +25,11 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    public menu: MenuController
+    public menu: MenuController,
+    private http: Http
   ) {
     this.initializeApp();
+    this.getSession();
 
     // set our app's pages
     this.pages = [
@@ -34,6 +37,7 @@ export class MyApp {
       { title: 'My First List', component: ListPage },
       { title: 'Listagem Teste', component: ProductListPage },
       { title: 'My Car', component: MyCartPage },
+      { title: 'Checkout', component: CheckoutPage },
     ];
   }
 
@@ -52,4 +56,10 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
+
+  getSession() {
+      this.http.get('http://localhost:8000/api/session')
+      .toPromise().then(response => PagSeguroDirectPayment.setSessionId(response.json().sessionId))
+  }
+
 }

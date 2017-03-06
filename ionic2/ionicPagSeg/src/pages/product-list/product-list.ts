@@ -26,7 +26,8 @@ export class ProductListPage implements OnInit {
 			private cart: Cart) {}
 
 	ngOnInit():any {
-		this.http.get('http://127.0.0.1:8000/api/products')
+		//this.products = Array<{'name': 'Test1', 'price': 55}>;
+		this.http.get('http://localhost:8000/api/products')
 			.toPromise().then(response => this.products = response.json())
 	}
 
