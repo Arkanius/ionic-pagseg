@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Cart } from '../../providers/cart'
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 declare var PagSeguroDirectPayment;
 
@@ -13,7 +14,7 @@ declare var PagSeguroDirectPayment;
 export class CheckoutPage implements OnInit {
 
   paymentMethods: Array<any> = [];
-  paymentMethod:  'Boleto';
+  paymentMethod:  'CREDIT_CARD';
 
   creditCard = {
   	num: '',
@@ -26,7 +27,8 @@ export class CheckoutPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
   	private cart: Cart,
-  	private ref: ChangeDetectorRef) {}
+  	private ref: ChangeDetectorRef,
+  	private http: Http) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckoutPage');
@@ -75,8 +77,23 @@ export class CheckoutPage implements OnInit {
   		success: response => {
   			this.creditCard.token = response.card.token
   			this.ref.detectChanges();
+  			this.sendPayment();
   		}
   	});
+
+  }
+
+  sendPayment() {
+  	let headers = new Headers({'Content-Type': 'application/json'});
+  	let options = new RequestOptions({headers: headers});
+
+  	this.http.post('http://localhost:8000/api/checkout', JSON.stringify({
+  		// items: this.cart.items,
+  		token: this.creditCard.token,
+  		hash: PagSeguroDirectPayment.getSenderHash(),
+  		method: 'CREDIT_CARD',
+  		total: 80,
+  	}), options).toPromise().then(reponse => console.log(reponse));
   }
 
 

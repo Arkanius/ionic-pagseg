@@ -20,6 +20,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function() {
 	});
 
 	Route::get('session', 'PagSeguroController@getSessionId');	
+	Route::post('checkout', 'OrderController@store');	
 });
 
 

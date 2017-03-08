@@ -12,3 +12,12 @@ PagSeguroDirectPayment.getBrand:  PAGSEGURO JS
 
 PagSeguroDirectPayment.createCardToken:  PAGSEGURO JS
 	Cria o token de pagamento passando as informações do cartão (numero, cvv, mes, ano, bandeira);
+
+
+---------------------
+PagSeguroDirectPaymentRequest: API BACK;
+	passar as  informações de compra;
+
+
+PagSeguroDirectPayment.getSenderHash: PAGSEGURO JS
+	cria hash do usuário;
