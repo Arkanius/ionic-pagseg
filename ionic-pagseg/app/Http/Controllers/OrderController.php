@@ -10,7 +10,6 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
-    	dd($request->total);
         $method = $request->method;
         // $items = $request->get('items');
         $hash = $request->hash;
@@ -32,7 +31,7 @@ class OrderController extends Controller
 
 
         foreach ($items as $key => $item){
-            $directPaymentRequest->addItem("00$key",$item['name'],1,$item['price']);
+            $directPaymentRequest->addItem("0001", 'Item Test1', 1, 1.00);
         }
 
         // INFORMAÇÕES DO USUÁRIO
@@ -52,7 +51,7 @@ class OrderController extends Controller
             'value' => $total
         ]);
 
-        dd($total);
+        // dd($total);
 
         $sedexCode = \PagSeguroShippingType::getCodeByType('SEDEX');
         $directPaymentRequest->setShippingType($sedexCode);
