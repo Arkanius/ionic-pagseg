@@ -1,4 +1,4 @@
-fluxo pagSeguro:
+fluxo pagSeguro::
 
 getSessionId: API BACK;
 PagSeguroDirectPayment.getPaymentMethods: PAGSEGURO JS
