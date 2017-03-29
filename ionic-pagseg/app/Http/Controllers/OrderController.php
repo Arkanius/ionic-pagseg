@@ -20,7 +20,7 @@ class OrderController extends Controller
         $directPaymentRequest->setPaymentMethod($method);
         $directPaymentRequest->setCurrency("BRL");
         
-        $items = [
+/*        $items = [
         	[
 	        	'name' => 'Item Test1',
 	        	'price' => 55,
@@ -31,8 +31,10 @@ class OrderController extends Controller
 
 
         foreach ($items as $key => $item){
-            $directPaymentRequest->addItem("0001", 'Item Test1', 1, 1.00);
-        }
+            // $directPaymentRequest->addItem("0001", 'Item Test1', $item->quantity, $item->value);
+        }*/
+        
+        $directPaymentRequest->addItem("0001", 'Item Test1', 1, 55.00);
 
         // INFORMAÇÕES DO USUÁRIO
         $directPaymentRequest->setSender(
